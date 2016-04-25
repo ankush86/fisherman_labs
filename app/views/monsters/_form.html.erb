@@ -1,0 +1,33 @@
+<%= form_for(@monster, :html => { role: 'form'}) do |f| %>
+  <% if @show_errors && @monster.errors.any? %>
+    <div id="error_explanation">
+      <% @monster.errors.full_messages.each do |msg| %>
+        <%= msg %><br>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <div class="controls">
+      <%= f.text_field :name, :autofocus => true, class: 'form-control input-lg',placeholder: 'Monster Name' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :power %>
+    <div class="controls">
+      <%= f.text_field :power, :autofocus => true, class: 'form-control input-lg', placeholder: 'Monster Power' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mtype, "Type" %>
+    <div class="controls">
+      <%= f.select :mtype, Monster::TYPE.keys, :value => '', class: 'form-control input-lg' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
