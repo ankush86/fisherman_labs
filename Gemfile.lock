@@ -193,6 +193,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  jwt
   omniauth
   omniauth-facebook
   pg

@@ -57,4 +57,24 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+  # routes for api points  
+  namespace :api, defaults: { format: "json" } do
+    namespace :v1 do
+      resources :users do
+        collection do
+          post :sign_up
+          post :sign_in
+          post :forgot_password
+          post :facebook
+          #get :neighbours
+        end
+      end
+      resources :posts
+      resources :invitations
+    end
+  end
+  
+
 end
