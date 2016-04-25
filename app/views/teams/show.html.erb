@@ -1,0 +1,11 @@
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+ 
+<p>
+  <strong>Monsters:</strong>
+  <%= @team.monsters.pluck(:name).join(",") %>
+</p>
+
+<%= link_to 'Back', monsters_path %>

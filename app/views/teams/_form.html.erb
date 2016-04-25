@@ -1,0 +1,35 @@
+<%= form_for(@team, :html => { role: 'form'}) do |f| %>
+  <% if @show_errors && @team.errors.any? %>
+    <div id="error_explanation">
+      <% @team.errors.full_messages.each do |msg| %>
+        <%= msg %><br>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <div class="controls">
+      <%= f.text_field :name, :autofocus => true, class: 'form-control input-lg',placeholder: 'Monster Name' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :monsters %>
+    <div class="controls">
+      <ul>
+        <% @monsters.each do |monster| %>
+            <li>
+              <%= check_box_tag 'monsters[]', monster.id -%>
+              <%= h monster.name -%>
+            </li>
+        <% end %>
+      </ul
+    </div>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

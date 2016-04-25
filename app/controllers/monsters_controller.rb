@@ -1,5 +1,6 @@
 class MonstersController < ApplicationController
 	before_action :authenticate_user!
+	before_action :check_monster_count, only: [:new, :create]
 
 	def new
 		@monster = Monster.new
@@ -64,5 +65,11 @@ class MonstersController < ApplicationController
 
 	def monster_params
 		params.require(:monster).permit(:name, :mtype, :power)
+	end
+
+	def check_monster_count
+		if current_user.check_monster_count?
+			flash[:notice] = "You have alredy created #{Monster::LIMIT} monsters."
+		end
 	end
 end

@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :identities,  dependent: :destroy
-
+  has_many :teams,  dependent: :destroy
   has_many :monsters,  dependent: :destroy
-  accepts_nested_attributes_for :monsters
+  accepts_nested_attributes_for :monsters, :teams
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
@@ -57,5 +57,9 @@ class User < ActiveRecord::Base
 
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  def check_monster_count?
+    self.monsters.count >= Monster::LIMIT 
   end
 end
